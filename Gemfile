@@ -26,8 +26,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'carrierwave'
 # Flexible authentication solution for Rails with Warden https://github.com/plataformatec/devise
 gem 'devise'
-# Minimal authorization through OO design and pure Ruby classes https://github.com/elabs/pundit
-gem "pundit"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
