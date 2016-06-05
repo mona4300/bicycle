@@ -24,6 +24,12 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 # Classier solution for file uploads for Rails https://github.com/carrierwaveuploader/carrierwave
 gem 'carrierwave'
+# A ruby wrapper for ImageMagick or GraphicsMagick command line.
+# https://github.com/minimagick/minimagick
+gem "mini_magick"
+# Filterrific is a Rails Engine plugin that makes it easy to filter, search, and sort your ActiveRecord lists
+# https://github.com/jhund/filterrific
+gem 'filterrific'
 # Flexible authentication solution for Rails with Warden https://github.com/plataformatec/devise
 gem 'devise'
 

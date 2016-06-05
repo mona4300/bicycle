@@ -1,33 +1,34 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Items</h1>
+<h1>Listing Items
+  <% if admin_signed_in? %>
+      <%= link_to 'New Item', new_item_path, class: "btn btn-primary pull-right", role: "button" %>
+  <% end %>
+</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Style</th>
-      <th>Price</th>
-      <th>Photo</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%= form_for_filterrific @filterrific, html: { class: "form-inline" } do |f| %>
+  <div class="form-group">
+    Name
+    <%= f.text_field(:name_contains, class: 'form-control filterrific-periodically-observed') %>
+  </div>
+  <div class="form-group">
+    Style
+    <%= f.select(:with_style, Item.styles.map { |key, value| [key.humanize, key] },
+     { include_blank: '- Any -' }, class: "form-control filterrific-periodically-observed") %>
+  </div>
+  <div class="form-group">
+    Price Min
+    <%= f.number_field(:price_min, class: "form-control filterrific-periodically-observed", step: 0.5) %>
+  </div>
+  <div class="form-group">
+    Price Max
+    <%= f.text_field(:price_max,  class: "form-control filterrific-periodically-observed", step: 0.5) %>
+  </div>
+<% end %>
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.name %></td>
-        <td><%= item.style %></td>
-        <td><%= item.price %></td>
-        <td><%= item.photo %></td>
-        <td><%= link_to 'Show', item %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<br/>
 
-<br>
-
-<%= link_to 'New Item', new_item_path %>
+<%= render(
+  partial: 'items/list',
+  locals: { items: @items }
+) %>

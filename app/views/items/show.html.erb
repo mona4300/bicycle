@@ -1,24 +1,27 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title"><%= @item.name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-4">
+        <%= image_tag @item.photo.medium.url, class:"img-rounded" %>
+      </div>
+      <div class="col-md-4">
+        <p><strong>Name:</strong><%= @item.name %> </p>
+        <p><strong>Description:</strong><%= @item.description %> </p>
+        <p><strong>Style:</strong><%= @item.style %> </p>
+        <p><strong>Price:</strong><%= @item.price %> </p>
 
-<p>
-  <strong>Style:</strong>
-  <%= @item.style %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= @item.photo %>
-</p>
-
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+        <% if admin_signed_in? %>
+          <p>
+            <%= link_to 'Edit', edit_item_path(@item), class:"btn btn-primary", role: "button" %>
+            <%= link_to 'Back', items_path, class:"btn btn-default" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

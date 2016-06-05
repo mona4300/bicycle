@@ -1,10 +1,21 @@
 class ItemsController < ApplicationController
+  before_action :authenticate_admin!, except: [:index, :show]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
 
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @filterrific = initialize_filterrific(
+       Item,
+       params[:filterrific]
+     ) or return
+     
+    @items = @filterrific.find
+
+   respond_to do |format|
+     format.html
+     format.js
+   end
   end
 
   # GET /items/1
@@ -69,6 +80,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:name, :style, :price, :photo)
+      params.require(:item).permit(:name, :style, :price, :photo, :description)
     end
 end
